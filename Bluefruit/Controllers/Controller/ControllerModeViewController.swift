@@ -21,6 +21,7 @@ class ControllerModeViewController: PeripheralModeViewController {
     fileprivate var controllerData: ControllerModuleManager!
     fileprivate var contentItems = [Int]()
     fileprivate weak var controllerPadViewController: ControllerPadViewController?
+    fileprivate weak var markerFollowViewController: MarkerFollowViewController?
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -216,7 +217,7 @@ extension ControllerModeViewController: ControllerPadViewControllerDelegate {
 // MARK: - UITableViewDataSource
 extension ControllerModeViewController : UITableViewDataSource {
     fileprivate static let kSensorTitleKeys: [String] = ["controller_sensor_quaternion", "controller_sensor_accelerometer", "controller_sensor_gyro", "controller_sensor_magnetometer", "controller_sensor_location"]
-    fileprivate static let kModuleTitleKeys: [String] = ["controller_module_pad", "controller_module_colorpicker"]
+    fileprivate static let kModuleTitleKeys: [String] = ["controller_module_pad", "controller_module_marker_follow", "controller_module_colorpicker"]
     
     enum ControllerSection: Int {
         case sensorData = 0
@@ -377,7 +378,18 @@ extension ControllerModeViewController: UITableViewDelegate {
                     controllerData.uartRxCacheReset()
                     controllerData.isUartRxCacheEnabled = true
                 }
-            } else {
+            } else if indexPath.row == 1 {
+               if let viewController = storyboard!.instantiateViewController(withIdentifier: "MarkerFollowViewController") as? MarkerFollowViewController {
+                   markerFollowViewController = viewController
+                   viewController.delegate = self
+                   navigationController?.show(viewController, sender: self)
+
+                   // Enable cache for control pad
+                   controllerData.uartRxCacheReset()
+                   controllerData.isUartRxCacheEnabled = true
+               }
+        
+            }else {
                 if let viewController = storyboard!.instantiateViewController(withIdentifier: "ControllerColorWheelViewController") as? ControllerColorWheelViewController {
                     viewController.delegate = self
                     navigationController?.show(viewController, sender: self)

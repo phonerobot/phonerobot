@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KIK-Wu-H5D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KIK-Wu-H5D">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -3142,7 +3142,55 @@
             </objects>
             <point key="canvasLocation" x="768" y="752"/>
         </scene>
+        <!--Marker Follow View Controller-->
+        <scene sceneID="xI1-vB-QLo">
+            <objects>
+                <viewController storyboardIdentifier="MarkerFollowViewController" id="VZT-IZ-FIM" customClass="MarkerFollowViewController" customModule="Bluefruit_Connect" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CeZ-v0-7bK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" wantsMultisampling="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Swm-oJ-yeR" customClass="ARSCNView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </sceneKitView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="82f-zU-fue">
+                                <rect key="frame" x="0.0" y="44" width="375" height="100"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.045196963028169015" colorSpace="custom" customColorSpace="sRGB"/>
+                            </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[STOP] X,Y,Z" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olo-rn-Ug0">
+                                <rect key="frame" x="0.0" y="95" width="375" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="olo-rn-Ug0" firstAttribute="top" secondItem="eEz-CV-yOe" secondAttribute="top" constant="51" id="0ib-O9-qwW"/>
+                            <constraint firstItem="olo-rn-Ug0" firstAttribute="leading" secondItem="82f-zU-fue" secondAttribute="leading" id="6m3-i6-wnm"/>
+                            <constraint firstItem="Swm-oJ-yeR" firstAttribute="leading" secondItem="eEz-CV-yOe" secondAttribute="leading" id="7d1-fN-KZU"/>
+                            <constraint firstItem="olo-rn-Ug0" firstAttribute="trailing" secondItem="Swm-oJ-yeR" secondAttribute="trailing" id="9ag-ph-EPz"/>
+                            <constraint firstItem="Swm-oJ-yeR" firstAttribute="centerY" secondItem="CeZ-v0-7bK" secondAttribute="centerY" id="GUh-92-h83"/>
+                            <constraint firstItem="82f-zU-fue" firstAttribute="top" secondItem="eEz-CV-yOe" secondAttribute="top" id="PmB-G9-vty"/>
+                            <constraint firstItem="olo-rn-Ug0" firstAttribute="leading" secondItem="Swm-oJ-yeR" secondAttribute="leading" id="WYA-yr-Hk6"/>
+                            <constraint firstItem="Swm-oJ-yeR" firstAttribute="centerX" secondItem="CeZ-v0-7bK" secondAttribute="centerX" id="hEm-CM-i3V"/>
+                            <constraint firstItem="olo-rn-Ug0" firstAttribute="trailing" secondItem="82f-zU-fue" secondAttribute="trailing" id="sgy-qk-UgT"/>
+                            <constraint firstItem="eEz-CV-yOe" firstAttribute="bottom" secondItem="82f-zU-fue" secondAttribute="bottom" constant="634" id="x2q-pp-sSc"/>
+                            <constraint firstItem="Swm-oJ-yeR" firstAttribute="top" secondItem="CeZ-v0-7bK" secondAttribute="topMargin" constant="-44" id="zpp-fG-7us"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eEz-CV-yOe"/>
+                    </view>
+                    <connections>
+                        <outlet property="sceneView" destination="Swm-oJ-yeR" id="prU-GG-NyA"/>
+                        <outlet property="statusLabel" destination="olo-rn-Ug0" id="XBg-K9-SAT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nd9-37-TDR" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="56.799999999999997" y="98.275862068965523"/>
+        </scene>
     </scenes>
+    <color key="tintColor" red="0.090196078431372548" green="0.57647058823529407" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
         <image name="batterylevel" width="16" height="24"/>
         <image name="ic_arrow_downward" width="48" height="48"/>
@@ -3163,5 +3211,4 @@
         <image name="signalstrength4" width="24" height="21"/>
         <image name="tab_info_icon" width="30" height="30"/>
     </resources>
-    <color key="tintColor" red="0.090196078431372548" green="0.57647058823529407" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

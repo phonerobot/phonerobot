@@ -444,6 +444,7 @@ https://learn.adafruit.com/bluefruit-le-connect-for-ios/pin-i-slash-o
 "controller_magnetometermissing" = "Your device doesn't have a magnetic sensor";
 
 "controller_module_pad" = "Control Pad";
+"controller_module_marker_follow" = "Marker Follow";
 "controller_module_colorpicker" = "Color Picker";
 
 "controller_help_title" = "Controller";
