@@ -25,6 +25,8 @@ class MarkerFollowViewController: UIViewController, ARSCNViewDelegate {
     var y:Float = 0.0
     var z:Float = 0.0
     
+    var currentCamera: SCNVector3?
+    
     
     @objc
     func imageLost(_ sender: Foundation.Timer){
@@ -95,7 +97,17 @@ class MarkerFollowViewController: UIViewController, ARSCNViewDelegate {
     //        statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
     //    }
         
-        
+    
+
+    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        guard let pointOfView = sceneView.pointOfView else { return }
+        let transform = pointOfView.transform
+        let orientation = SCNVector3(-transform.m31, -transform.m32, transform.m33)
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        self.currentCamera = SCNVector3(orientation.x + location.x, orientation.y + location.y, orientation.z + location.z)
+        print(self.currentCamera)
+    }
+    
         func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
 
             DispatchQueue.main.async {
@@ -106,7 +118,7 @@ class MarkerFollowViewController: UIViewController, ARSCNViewDelegate {
                   }
             
             
-            let cameraPosition = self.sceneView.pointOfView?.position
+            let cameraPosition = self.currentCamera
             let anchorPosition = anchor.transform[3]
 
 
@@ -120,16 +132,16 @@ class MarkerFollowViewController: UIViewController, ARSCNViewDelegate {
             let cameraZ = cameraPosition?.y ?? 0
             let cameraY = cameraPosition?.z ?? 0
             
-            self.x = cameraX - cameraX - anchorX
-            self.y = cameraY - cameraY - anchorY
-            self.z = cameraZ - cameraZ - anchorZ
+            self.x = cameraX - anchorX
+            self.y = cameraY - anchorY
+            self.z = cameraZ - anchorZ
                 
             
 
       
             
             
-            if (self.x > 0.02) {
+            if (self.x > 0.1) {
                 command = "LEFT"
          
                   
@@ -139,7 +151,7 @@ class MarkerFollowViewController: UIViewController, ARSCNViewDelegate {
                 }
                 
                 
-            }else if (self.x < -0.13){
+            }else if (self.x < -0.08){
                 command = "RIGHT"
    
                  
@@ -174,7 +186,7 @@ class MarkerFollowViewController: UIViewController, ARSCNViewDelegate {
             
              
           DispatchQueue.main.async {
-            self.statusLabel.text = "[\(self.command)] \(String(format: "%.2f", cameraX)), \(String(format: "%.2f", cameraY)), \(String(format: "%.2f", cameraZ))"
+            self.statusLabel.text = "[\(self.command)] \(String(format: "%.2f", self.x)), \(String(format: "%.2f", self.y)), \(String(format: "%.2f", self.z))"
 
           }
              
@@ -182,7 +194,7 @@ class MarkerFollowViewController: UIViewController, ARSCNViewDelegate {
             
             
             
-                print(x,y,z)
+//                print(x,y,z)
                 
 
             
