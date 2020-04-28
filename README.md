@@ -3,10 +3,10 @@
 ### Brandon Olson (Section B), Afshawn Lotfi (B), Ian Kim (A), Will Stull (A)
 
 # Presentation
-[![Presentation]()](https://youtu.be/N7F6d9_lkUI)
+[![](https://img.youtube.com/vi/N7F6d9_lkUI/0.jpg)](https://youtu.be/N7F6d9_lkUI)
 
 # Demonstration
-[![Presentation]()](https://youtu.be/aPNwgx1q9cE)
+[![](https://img.youtube.com/vi/aPNwgx1q9cE/0.jpg)](https://youtu.be/aPNwgx1q9cE)
 
 
 
